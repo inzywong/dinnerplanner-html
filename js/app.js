@@ -7,11 +7,11 @@ $(function()
 	//var exampleView = new ExampleView($("#exampleView"));
 
     //
-    var sideBarView = new SideBarView($("#sideBar"), model);
-    var dishItemView =new DishItemView($("#dishItems"), model);
-    var dishDetailsView = new DishDetailsView($("#dishDetails"), model);
-	var searchView = new SearchView($("#searchField"), model);
-    var dinnerPrintoutView = new DinnerPrintoutView( $("#fifthView"), model);
+    //var sideBarView = new SideBarView($("#sideBar"), model);
+    //var dishItemView =new DishItemView($("#dishItems"), model);
+    //var dishDetailsView = new DishDetailsView($("#dishDetails"), model);
+	//var searchView = new SearchView($("#searchField"), model);
+    //var dinnerPrintoutView = new DinnerPrintoutView( $("#fifthView"), model);
     
 
     
@@ -36,8 +36,7 @@ $(function()
     
     
     
-    pagesDisplayer.showHomePage = function()
-    {
+    pagesDisplayer.showHomePage = function(){
         appDiv.html(homeTemplate);
         
         // create an instance of HomeView (it populates the HTML and
@@ -51,56 +50,41 @@ $(function()
         controllers.homeController = new HomeController(views.homeView, model, pagesDisplayer);
     }
     
-/*    
-    pagesDisplayer.showSearchView = function()
-    {
-        pagesDisplayer.showSideBar();
-        //appDiv.html(searchTemplate);
-    }    
     
-    
-    
-    pagesDisplayer.showSideBar = function()
-    {
-        appDiv.html(sideBarTemplate);
-        appDiv.append(dishDetailsTemplate);  
-        
-        views.sideBar = new SideBarView($("#sideBar"), model);
-         
+    pagesDisplayer.showSearchView = function(){
+        appDiv.html("");
+        showSideBar();
+        showSelectableDishes();
+    }   
+     
+            //view.findDishes = new FindDishView($("#dishItems"),model);
+            //controllers.findDishController = new FindDishController(views.findDishes, model, pageDisplayer);
+
+    function showSideBar (){
+        appDiv.append(sideBarTemplate);        
+        views.sideBar = new SideBarView($("#sideBar"), model);         
         controllers.sidebarController = new SideBarController(views.sideBar, model, pagesDisplayer);
     }
-*/
     
-    
-    function showSideBar() 
-    {
-        appDiv.html(sideBarTemplate);
-        views.sideBar = new SideBarView($("#sideBar"), model);
-        controllers.sidebarController = new SideBarController(views.sideBar, model, pagesDisplayer);       
+    function showSelectableDishes(){
+        appDiv.append(selectDishesTemplate);
+        views.selectDishes = new SelectDishesView($("#selectDishes"), model); 
+        controllers.selectDishesController = new SelectDishesController(views.selectDishes, model, pagesDisplayer);
     }
-   
-    function showDishDetails() 
-    {
-        appDiv.append(dishDetailsTemplate);
-        views.dishDetails = new DishDetailsView($("#dishDetails"), model);
-        controllers.dishDetailsController = new DishDetailsController(views.dishDetails, model, pagesDisplayer);       
-    }                                          
-    
+    /*
+
+    function showFindDishes(){
+        appDiv.html();
+        views.dishItemView = new DishItemView($("#dishItems"),model);
+        controllers.dishItemController = new DishItemController(views.dishItemView, model, pageDisplayer);
+
+    }
+
     pagesDisplayer.showDishDetailsPage = function()
     {
-       appDiv.html(""); 
-       showSideBar();
-       showDishDetails();
+        appDiv.append(dishDetailsTemplate);  
     }    
+    */
     
-   
-    
-    //pagesDisplayer.showHomePage();
-    //pagesDisplayer.showDishDetailsPage();    
-    pagesDisplayer.showDishDetailsPage();
+    pagesDisplayer.showHomePage();
 });
-
-
-
-
-

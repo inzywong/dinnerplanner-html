@@ -28,8 +28,6 @@ var SideBarView = function (container, model)
         //dishNameCostDiv.append("<div class='col-md-6'> <p style='text-align:right'>"+ model.getDishPrice(selectedDishes[i].id) + " SEK</p> </div> </div>");        
     }
     */
-    
-    
 
     
     this.update = function()
@@ -55,8 +53,6 @@ var SideBarView = function (container, model)
             //dishNameCostDiv.append("<div class='col-md-6'> <p style='text-align:right'>"+ model.getDishPrice(selectedDishes[i].id) + " SEK</p> </div> </div>");        
         }        
     }
-    
-    
     this.update();
 }
 

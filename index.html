@@ -16,11 +16,17 @@
 </head>
 
 <body>
+
+    <!-- header-->
+    <div class="row col-sm-12 jumbotron text-center" style="padding: 0">
+                <h1>Dinner planner</h1>
+    </div>
+
     <div class=row id="appDiv">
     </div>
 
-
-
+    <div class="row col-sm-12" style="padding: 0; border: 1px solid black">
+    </div>
 
 
     <!-- jQuery -->
@@ -31,9 +37,9 @@
 
     <!-- Each view has its own HTML-->
 	<script src="templates/home.html"></script>
-	<script src="templates/findDish.html"></script>
-	<script src="templates/sideBarPage.html"></script>
-	<script src="templates/dishDetailsPage.html"></script>
+    <script src="templates/sideBarPage.html"></script>
+    <script src="templates/selectDishes.html"></script>
+
 
 
     <!-- The application JavaScript code -->
@@ -44,18 +50,22 @@
 
     <!-- TODO: Here you should include JS code for your other views -->
     <script src="js/view/sideBarView.js"></script>
-    <script src="js/view/dishItemView.js"></script>
-    <script src="js/view/dishDetailsView.js"></script>
+    <script src="js/view/selectDishesView.js"></script>
+    <!--<script src="js/view/dishDetailsView.js"></script>
     <script src="js/view/searchView.js"></script>
-    <script src="js/view/dinnerPrintoutView.js"></script>
+    <script src="js/view/dinnerPrintoutView.js"></script>-->
     <script src="js/view/homeView.js"></script>    
     
     
     <!-- Adding the controllers -->
     <script src="js/controllers/homeController.js"></script>    
-    <script src="js/controllers/sidebarController.js"></script>  
-    <script src="js/controllers/dishDetailsController.js"></script>        
+    <script src="js/controllers/sidebarController.js"></script>    
+    <script src="js/controllers/selectDishesController.js"></script>
     
+    
+
+
+
     
 
 </body>

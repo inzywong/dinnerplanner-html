@@ -10,10 +10,20 @@ var DinnerModel = function()
     // Array containing the ID of the dishes selected
     // I'm initializing it with some dishes just to test the app
     var dishesSelectedID = [2,103,202];
+	
+	var observers = [];
     
-    
-	//TODO Lab 1 implement the data structure that will hold number of guest
-	// and selected dishes for the dinner menu
+	this.addObserver = function(observer) {
+		observers.push(observer);
+	}
+
+	var notifyObservers = function(obj) {
+		observers.forEach(function(observer){
+			//notify each observer in some kind of weird way by using obj?
+			//the following is the way nico did
+			//observer.update();
+		});
+	}
 
 	this.setNumberOfGuests = function(num) 
     {

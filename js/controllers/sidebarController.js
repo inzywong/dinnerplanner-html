@@ -2,7 +2,7 @@
 
 var SideBarController = function(view, model, pagesDisplayer) 
 {
-    console.log(" SIDE BAR CONTROLLER! ");
+    //console.log(" SIDE BAR CONTROLLER! ");
     
     
     // getting a reference to the buttons:

@@ -1,5 +1,3 @@
-
-
 var HomeController = function(view, model, pagesDisplayer) 
 {
     // When the user clicks on the 'create new dinner' button
