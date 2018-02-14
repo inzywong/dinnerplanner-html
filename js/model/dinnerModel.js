@@ -9,7 +9,31 @@ var DinnerModel = function()
     
     // Array containing the ID of the dishes selected
     // I'm initializing it with some dishes just to test the app
-    var dishesSelectedID = [2,103,202];
+    //var dishesSelectedID = [2,103,202];
+    var dishesSelectedID = [];   
+   
+   // This will contain all our observers.
+   // They will basically be a reference to our views so we can call their update functions
+   var observers = [];
+   
+   this.addObserver = function(obs) 
+   { /* Your code here */ 
+      observers.push(obs);
+      
+   }
+   
+   
+   var notifyObservers = function(obj)
+   {
+      for(var i=0; i<observers.length; i++)
+      {
+         observers[i].update();
+      }
+   }
+   
+   
+   
+ 
     
     
 	//TODO Lab 1 implement the data structure that will hold number of guest
@@ -36,11 +60,13 @@ var DinnerModel = function()
     this.addOneGuest = function()
     {
         this.setNumberOfGuests( this.getNumberOfGuests() + 1);
+        notifyObservers();
     }
     
     this.removeOneGuest = function()
     {
         this.setNumberOfGuests( this.getNumberOfGuests() - 1);
+        notifyObservers();       
     }    
     
     
@@ -103,39 +129,60 @@ var DinnerModel = function()
     {
         var totalPrice = 0;
     
-        var ingredients = this.getAllIngredients();
-        
+        var ingredients = this.getAllIngredients();       
+       
         // Each dish has a list of ingredients.
         // 'ingredients' is a list of the list of ingredients for the dishes selected
         for(var i=0; i< ingredients.length; i++)
         {
-            for(var m=0; m<ingredients[i]; m++)
-            {
+            for(var m=0; m<ingredients[i].length; m++)
+            {               
                 totalPrice += ingredients[i][m].price;
             }
         }
-            
+
         return totalPrice*nGuests;   
 	}
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) 
-    {
-        // Go through every dish selected
-        for(var i=0; i<dishesSelectedID.length; i++)
-        {
-            // If there's already a dish of the type we are trying to add, we should remove it
-            if( dishesSelectedID[i].type == this.getDish(id).type  )
-            {
-                // removing the dish of the same type
+    {           
+       
+
+       // If there is no selected dishes, we should add it right away
+       if(dishesSelectedID.length == 0)
+       {
+          dishesSelectedID.push(id);
+       }       
+       
+       // If there is already some dishes selected, we should check if there isn't some dish of the same type
+       else
+       {
+          var inserted = false;
+          // Go through every dish selected
+          for(var i=0; i<dishesSelectedID.length; i++)
+          {        
+             if( this.getDish(dishesSelectedID[i]).type == this.getDish(id).type)
+             {
                 this.removeDishFromMenu(dishesSelectedID[i]);
                 
                 // Adding the new dish to our dishesSelectedID
                 dishesSelectedID.push(id);
-            }
-        }
-	}
+                
+                inserted = true;
+                break;
+             }
+          }
+          
+          if(!inserted)
+          {
+             dishesSelectedID.push(id);
+          }
+       }
+
+      notifyObservers(); 
+    }
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) 
@@ -145,9 +192,11 @@ var DinnerModel = function()
         {
             if( dishesSelectedID[i] == id )
             {
-                dishesSelectedID[i].splice(i,1);
+                dishesSelectedID.splice(i,1);
             }
         }
+       
+        notifyObservers();       
 	}
     
     //Get the price of the dish
@@ -179,8 +228,9 @@ var DinnerModel = function()
 					found = true;
 				}
 			});
-			if(dish.name.indexOf(filter) != -1)
-			{
+			//if(dish.name.indexOf(filter) != -1)
+			if(dish.name.toLocaleLowerCase().indexOf(filter) != -1)
+            {
 				found = true;
 			}
 		}

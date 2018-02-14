@@ -7,11 +7,11 @@ $(function()
 	//var exampleView = new ExampleView($("#exampleView"));
 
     //
-    var sideBarView = new SideBarView($("#sideBar"), model);
-    var dishItemView =new DishItemView($("#dishItems"), model);
-    var dishDetailsView = new DishDetailsView($("#dishDetails"), model);
-	var searchView = new SearchView($("#searchField"), model);
-    var dinnerPrintoutView = new DinnerPrintoutView( $("#fifthView"), model);
+    //var sideBarView = new SideBarView($("#sideBar"), model);
+    //var dishItemView =new DishItemView($("#dishItems"), model);
+    //var dishDetailsView = new DishDetailsView($("#dishDetails"), model);
+	//var searchView = new SearchView($("#searchField"), model);
+    //var dinnerPrintoutView = new DinnerPrintoutView( $("#fifthView"), model);
     
 
     
@@ -52,11 +52,78 @@ $(function()
     }
     
     
+    // show sidebar + findDishes 
+    pagesDisplayer.showSelectDishesPage = function(){
+       appDiv.html("");
+       showSideBar();
+       showFindDishes();
+    }
+    
+   
+    pagesDisplayer.showDishDetails = function(dishId){
+       appDiv.html(""); 
+       showSideBar();
+       showDishDetails(dishId);       
+    }
+    
+    pagesDisplayer.showDinnerSummary = function(){
+       appDiv.html(dinnerSummaryTemplate); 
+       views.dinnerSummary = new DinnerSummaryView($("#dinnerSummary"), model);
+       controllers.dinnerSummaryController = new DinnerSummaryController(views.dinnerSummary, model, pagesDisplayer);
+    }
+    
+    
+    pagesDisplayer.showFullReceipe = function(){
+       appDiv.html(fullRecipeTemplate); 
+       views.fullRecipe = new FullReceipeView($("#fullReceipe"), model);
+       controllers.fullReceipeController = new FullReceipeController(views.fullRecipe, model, pagesDisplayer);
+    }    
+   
+    
+    
+    
+    
+    // ==================================================================================================================
+    function showSideBar(){
+        appDiv.html(sideBarTemplate);
+        views.sideBar = new SideBarView($("#sideBar"), model);
+        controllers.sidebarController = new SideBarController(views.sideBar, model, pagesDisplayer);       
+    }
+    
+    function showFindDishes(){
+       appDiv.append(findDishesTemplate);
+       views.findDishes = new SearchView($("#findDishes"), model);
+       controllers.searchController = new SearchController(views.findDishes, model, pagesDisplayer);
+    }    
+    
+   
+    function showDishDetails(id) 
+    {
+        appDiv.append(dishDetailsTemplate);
+        views.dishDetails = new DishDetailsView($("#dishDetails"), model, id);
+        controllers.dishDetailsController = new DishDetailsController(views.dishDetails, model, pagesDisplayer);       
+    }      
+    // ==================================================================================================================
+
+   
+   
+   
+    /*
+    pagesDisplayer.showSearchView = function(){
+        appDiv.html("");
+        showSideBar();
+        showSelectableDishes();
+    }      
+    */
+    
+    
+/*    
     pagesDisplayer.showSearchView = function()
     {
         pagesDisplayer.showSideBar();
         //appDiv.html(searchTemplate);
     }    
+    
     
     
     pagesDisplayer.showSideBar = function()
@@ -67,17 +134,39 @@ $(function()
         views.sideBar = new SideBarView($("#sideBar"), model);
          
         controllers.sidebarController = new SideBarController(views.sideBar, model, pagesDisplayer);
-
     }
+*/
     
+
+    
+    
+   /*
+    function showDishDetails() 
+    {
+        appDiv.append(dishDetailsTemplate);
+        views.dishDetails = new DishDetailsView($("#dishDetails"), model);
+        controllers.dishDetailsController = new DishDetailsController(views.dishDetails, model, pagesDisplayer);       
+    }                                          
+   
+   
     pagesDisplayer.showDishDetailsPage = function()
     {
-        appDiv.append(dishDetailsTemplate);  
+       appDiv.html(""); 
+       showSideBar();
+       showDishDetails();
     }    
-    
-    
-    
+    */
+   
     
     pagesDisplayer.showHomePage();
-    //pagesDisplayer.showSearchView();    
+    //pagesDisplayer.showSelectDishesPage();
+    //pagesDisplayer.showDishDetailsPage();    
+    //pagesDisplayer.showDinnerSummary();
+   
+    //pagesDisplayer.showFullReceipe();   
 });
+
+
+
+
+
