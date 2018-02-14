@@ -1,15 +1,12 @@
 //DinnerModel Object constructor
 var DinnerModel = function() 
 {
-    var nGuests;
+    var nGuests=0;
     
-    // Just to test our app
-    //nGuests = 3;
-    nGuests = 0;
     
     // Array containing the ID of the dishes selected
     // I'm initializing it with some dishes just to test the app
-    var dishesSelectedID = [2,103,202];
+    var dishesSelectedID = [];
 	
 	var observers = [];
     
@@ -184,15 +181,16 @@ var DinnerModel = function()
 		var found = true;
 		if(filter){
 			found = false;
+			//Fix this check so we can compare letter for letter capitalized and uncapitalized
+			if(dish.name.toLowerCase().indexOf(filter)!=-1) {
+				found = true;
+			}
 			dish.ingredients.forEach(function(ingredient) {
 				if(ingredient.name.indexOf(filter)!=-1) {
 					found = true;
 				}
 			});
-			if(dish.name.indexOf(filter) != -1)
-			{
-				found = true;
-			}
+
 		}
 		if (type) {
 			return dish.type == type && found;
