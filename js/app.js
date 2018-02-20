@@ -79,10 +79,6 @@ $(function()
        controllers.fullReceipeController = new FullReceipeController(views.fullRecipe, model, pagesDisplayer);
     }    
    
-    
-    
-    
-    
     // ==================================================================================================================
     function showSideBar(){
         appDiv.html(sideBarTemplate);
@@ -103,67 +99,7 @@ $(function()
         views.dishDetails = new DishDetailsView($("#dishDetails"), model, id);
         controllers.dishDetailsController = new DishDetailsController(views.dishDetails, model, pagesDisplayer);       
     }      
-    // ==================================================================================================================
-
-   
-   
-   
-    /*
-    pagesDisplayer.showSearchView = function(){
-        appDiv.html("");
-        showSideBar();
-        showSelectableDishes();
-    }      
-    */
-    
-    
-/*    
-    pagesDisplayer.showSearchView = function()
-    {
-        pagesDisplayer.showSideBar();
-        //appDiv.html(searchTemplate);
-    }    
-    
-    
-    
-    pagesDisplayer.showSideBar = function()
-    {
-        appDiv.html(sideBarTemplate);
-        appDiv.append(dishDetailsTemplate);  
-        
-        views.sideBar = new SideBarView($("#sideBar"), model);
-         
-        controllers.sidebarController = new SideBarController(views.sideBar, model, pagesDisplayer);
-    }
-*/
-    
-
-    
-    
-   /*
-    function showDishDetails() 
-    {
-        appDiv.append(dishDetailsTemplate);
-        views.dishDetails = new DishDetailsView($("#dishDetails"), model);
-        controllers.dishDetailsController = new DishDetailsController(views.dishDetails, model, pagesDisplayer);       
-    }                                          
-   
-   
-    pagesDisplayer.showDishDetailsPage = function()
-    {
-       appDiv.html(""); 
-       showSideBar();
-       showDishDetails();
-    }    
-    */
-   
-    
-    pagesDisplayer.showHomePage();
-    //pagesDisplayer.showSelectDishesPage();
-    //pagesDisplayer.showDishDetailsPage();    
-    //pagesDisplayer.showDinnerSummary();
-   
-    //pagesDisplayer.showFullReceipe();   
+    pagesDisplayer.showHomePage(); 
 });
 
 

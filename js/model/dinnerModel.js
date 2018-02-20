@@ -3,21 +3,17 @@ var DinnerModel = function()
 {
     var nGuests;
     
-    // Just to test our app
     //nGuests = 3;
     nGuests = 0;
     
     // Array containing the ID of the dishes selected
-    // I'm initializing it with some dishes just to test the app
     //var dishesSelectedID = [2,103,202];
     var dishesSelectedID = [];   
    
-   // This will contain all our observers.
-   // They will basically be a reference to our views so we can call their update functions
    var observers = [];
    
    this.addObserver = function(obs) 
-   { /* Your code here */ 
+   { 
       observers.push(obs);
       
    }
@@ -31,13 +27,6 @@ var DinnerModel = function()
       }
    }
    
-   
-   
- 
-    
-    
-	//TODO Lab 1 implement the data structure that will hold number of guest
-	// and selected dishes for the dinner menu
 
 	this.setNumberOfGuests = function(num) 
     {

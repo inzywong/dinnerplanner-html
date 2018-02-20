@@ -26,12 +26,6 @@ html,body
 }
 
 
-
-
-
-
-
-
 #dishNameAndCostDiv
 {  
   background-color: lightgrey;
@@ -47,11 +41,35 @@ html,body
 {
     margin-top: 30px;
 }
-
-
+.myHeader
+{
+  background-color: #888;
+}
+.myFooter
+{
+  padding-top: 0px;
+}
 .addBorder
 {
   border: 2px black solid;
+}
+
+.myPadding
+{
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.addBorder-left
+{
+  border-left: 4px black solid;
+}
+.addBorder-bottom
+{
+  border-bottom: 4px black solid;
+}
+.addBorder-top
+{
+  border-top: 4px black solid;
 }
 
 
