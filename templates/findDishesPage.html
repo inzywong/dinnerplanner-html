@@ -6,41 +6,55 @@ var findDishesTemplate = `
     <h1>Find a dish</h1> 
     
     <!--Search bar + button + dropdown menu -->
-    <div class="row">    
-       <div class ="col-md-10 col-sm-10 input-group" id="searchBar">
+    <div class="row">    <!--
+       <div class ="col-md-10 col-sm-10 input-group form-inline" id="searchBar">
+                <input type="text" id="SearchField" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary specialButton">
+                    <span class="glyphicon glyphicon-search "></span>
+                    Search
+                    </button>
+                </span>
+                <div class="dropdown btn btn-primary dropdown-toggle">
+                    <form>
+                        <select id="DishType" class="btn-primary" style="border:0px">
+                            <option value="all">All</option>
+                            <option value="starter">Starter</option>
+                            <option value="main dish">Main dish</option>
+                            <option value="dessert">Dessert</option>
+                        </select>
+                    </form>
+                </div>
+        </div>    -->
+        <div class="col-sm-1 col-md-1"></div>
+            <form class="form-inline" id="searchBar">
+                <input type="text" id="SearchField" class="form-control col-sm-2 col-form-label mb-2 mr-sm-2 mb-sm-0" placeholder="Search...">
+                <span>
+                    <button type="button" class="btn btn-primary specialButton">
+                        <span class="glyphicon glyphicon-search "></span>
+                        Search
+                    </button>
+                </span>
+                <label class="mr-sm-2" for="inlineFormCustomSelect">Dish Type:</label>
+                <select class="dropdown btn btn-primary dropdown-toggle custom-select mb-2 mr-sm-2 mb-sm-0" id="DishType" style="border:0px">
+                  <option value="all" selected>All</option>
+                  <option value="starter">Starter</option>
+                  <option value="main dish">Main dish</option>
+                  <option value="dessert">Dessert</option>
+                </select>
 
-                  <input type="text" id="SearchField" class="form-control" placeholder="Search">
-                      <span class="input-group-btn">
-                      <button type="button" class="btn btn-primary specialButton">
-                      <span class="glyphicon glyphicon-search "></span>
-                      Search
-                      </button>
-                      </span>
-                      <div class="dropdown btn btn-primary dropdown-toggle">
-                      <form>
-                          <select id="DishType" class="btn-primary" style="border:0px">
-                              <option value="all">All</option>
-                              <option value="starter">Starter</option>
-                              <option value="main dish">Main dish</option>
-                              <option value="dessert">Dessert</option>
-                          </select>
-                      </form>
-                  </div>
-       </div>    
-     </div>
-    
-    
-    
+              
+            </form>
+    </div>
 
-                  
     <hr>
                   
     <!-- IMAGES -->
     <div class="row">
         <div class="col-md-12 " style="padding-top:25px" id="dishImages" > 
-           
         </div>
-     </div>       
+    </div>      
+
 </div>
 
         
