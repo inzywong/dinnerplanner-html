@@ -26,6 +26,269 @@
     </div>
    
     <div class=row id="appDiv">
+		
+		<!-- HOME PAGE -->
+		<div class="container-fluid myPadding" id="homeView" style="display: none">
+
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" id="introductionTextContainer">
+					<p class="textJustifyCenter"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+						standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+						to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+						typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+						including versions of Lorem Ipsum.</p>
+
+					<div class="col-md-12 text-center">
+						<button type="button" class="btn btn-primary" id="createDinnerButton">Create a new dinner</button>
+					</div>
+
+				</div>
+				<div class="col-sm-3"></div>
+		</div>	
+		<!---------------------------------------------------------------------------------------------------->
+		
+		<!-- SIDE BAR ---------------------------------------------------------------------------------------->
+		<div class = "col-sm-2" id="sideBar" style="display: none">
+			<h1>My Dinner</h1>
+			<p>Number Of Guests: <span id="nGuests"></span>
+
+			<div>
+				<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+				<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+			</div> 
+
+
+			<div class="row" id="dishNameAndCostDiv" >
+				<!-- left div -->
+				<div class="col-md-6 noPadding" style="float:left">
+					<p style="text-align:left">Dish Name</p>                    
+				</div>
+
+				<!-- right div -->                
+				<div class="col-md-6">
+					<p style="text-align:right">Cost</p>
+				</div>
+			</div>
+
+			<div id="dish_cost">
+
+			</div>
+
+			<div >
+				<!-- left div -->
+			  <div class="col-md-6 noPadding" style="float:left">
+				 <p style="text-align:left">TOTAL </p>                    
+			  </div>
+
+
+				<!-- right div -->                
+			   <div class="col-md-6">
+				 <p id="total_cost" style="text-align:right">SEK 0.00</p>
+			   </div>                        
+			</div>   
+
+			<div class="col-md-12 text-center" id="confirmDinnerButton">
+				<button id="confirm_dinner_button" type="button" class="btn btn-primary">Confirm Dinner</button>
+			</div>
+		</div>    		
+		<!---------------------------------------------------------------------------------------------------->
+		
+		<!-- Full Recipe Page -------------------------------------------------------------------------------->
+		<div class="container-fluid" id="fullReceipe" style="display: none" >
+			<div class="row" >
+				<div class="col-sm-12" style="padding: 0">
+					<div class="col-sm-9">
+						<h1>My Dinner:
+							<span id="nGuests"></span> </h1>
+					</div>
+					
+					
+					<div class="col-sm-3" style="padding-top:10px">
+						<button id ="returnToPreviousPageButton" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span>Return to previous page</button>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class ="row" id="dishesT">
+			</div>
+    	</div>
+		<!---------------------------------------------------------------------------------------------------->
+		
+		
+		
+		<!-- Find Dishes Page -------------------------------------------------------------------------------->
+		 <div class = "col-sm-10  addBorder-left" id="findDishes" style="display: none">
+			<h1>Find a dish</h1> 
+
+			<!--Search bar + button + dropdown menu -->
+			<div class="row">    <!--
+			   <div class ="col-md-10 col-sm-10 input-group form-inline" id="searchBar">
+						<input type="text" id="SearchField" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Search...">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-primary specialButton">
+							<span class="glyphicon glyphicon-search "></span>
+							Search
+							</button>
+						</span>
+						<div class="dropdown btn btn-primary dropdown-toggle">
+							<form>
+								<select id="DishType" class="btn-primary" style="border:0px">
+									<option value="all">All</option>
+									<option value="starter">Starter</option>
+									<option value="main dish">Main dish</option>
+									<option value="dessert">Dessert</option>
+								</select>
+							</form>
+						</div>
+				</div>    -->
+				<div class="col-sm-1 col-md-1"></div>
+					<form class="form-inline" id="searchBar">
+						<input type="text" id="SearchField" class="form-control col-sm-2 col-form-label mb-2 mr-sm-2 mb-sm-0" placeholder="Search...">
+						<span>
+							<button type="button" class="btn btn-primary specialButton">
+								<span class="glyphicon glyphicon-search "></span>
+								Search
+							</button>
+						</span>
+						<label class="mr-sm-2" for="inlineFormCustomSelect">Dish Type:</label>
+						<select class="dropdown btn btn-primary dropdown-toggle custom-select mb-2 mr-sm-2 mb-sm-0" id="DishType" style="border:0px">
+						  <option value="all" selected>All</option>
+						  <option value="starter">Starter</option>
+						  <option value="main dish">Main dish</option>
+						  <option value="dessert">Dessert</option>
+						</select>
+
+
+					</form>
+			</div>
+
+			<hr>
+
+			<!-- IMAGES -->
+			<div class="row">
+				<div class="col-md-12 " style="padding-top:25px" id="dishImages" > 
+				</div>
+			</div>      
+
+		</div>		
+		<!---------------------------------------------------------------------------------------------------->
+		
+		
+		
+	   <!-- Dish Details Page -------------------------------------------------------------------------------->
+	   <div class="col-sm-10 addBorder-left" id="dishDetails" style="display: none">
+
+		  <div class="container-fluid">
+			 <div class="row">
+				<div class="col-sm-5 ">
+				   <h1 id="dish_name"> Dish A</h1>
+
+				   <img id="dish_image" src="images/bakedbrie.jpg" style="width:100%; height: 400px">
+
+				   <p class="textJustifyCenter" style="width:100%;" id="dishDescription"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+									the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+									of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+									but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
+									in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+									recently with desktop publishing software like Aldus PageMaker including versions of Lorem
+									Ipsum.</p>
+
+				   <div class="col-md-12 text-left" style="margin-bottom: 20px; margin-top: 20px">
+					  <button type="button" class="btn btn-primary" id="back_to_search">Back to search</button>
+				   </div>
+				</div>
+
+
+				<!-- Ingredients Table -->
+				<div class="col-sm-7 addBorder" style="border-top:0px; border-right:0px">
+				   <h1 id="tableTitle"> Ingredients for X people</h1>
+				   <hr style="border-color: black">
+
+				   <div class="container-fluid" id="tableItens">
+
+					  <div class="container-fluid" id="tableIngredients">
+					  </div>   
+
+					  <div class="container-fluid" id="tableButtonAndPrice">
+
+							<hr style="border-color: black">  
+
+							<!-- Row for each dish -->
+							<div class="row">
+							   <div class="col-xs-6">
+								  <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px">
+									 <button type="button" class="btn btn-primary" id="add_to_menu">Add to menu</button>
+								  </div>
+							   </div>
+
+							   <div class="col-xs-6 text-right">
+								  <p id="totalPrice">??? SEK </p>
+							   </div>
+							</div>
+					  </div>
+
+				</div><!-- END of Ingredients Table -->
+
+			 </div>
+			 </div>
+
+			 <div class="row">
+				<h1> Preparation </h1>
+				<p class="" style="width:100%;" id="preparation"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+								type and scrambled it to make a type specimen book. It has survived not only five centuries,
+								but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
+								in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+								with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			 </div>
+		  </div>
+	   </div><!-- END of right side (Find a dish + food images) -->
+
+	<!-- </div>	-->	
+	<!---------------------------------------------------------------------------------------------------->
+		
+		
+		
+	<!-- Dinner Summary ---------------------------------------------------------------------------------->
+    <div class="container-fluid" id="dinnerSummary" style="display: none" >
+        <div class="row">
+            <div class="col-sm-12" style="padding: 0">
+                <div class="col-sm-9">
+                    <h1>My Dinner:
+                        <span id="nGuests"></span> </h1>
+                </div>
+                <div class="col-sm-3" style="padding-top:10px">
+                    <button id ="return_to_previous_page_button" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span>Return to previous page</button>
+                </div>
+            
+            </div>
+        </div>
+        <div class="row">
+            <!-- my dinner -->
+            <div class="myDinner col-sm-9" id="dishes_list">
+               
+            </div>
+            <!--total-->
+            <div class="totalPrice col-sm-3">
+
+                <div style="height: 180px;"></div>
+                <h3 id="total_price">Total:</br>Price X+Y+Z</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="printButton">
+                <center>
+                    <button id="print_full_recipe_button" type="button" class="btn btn-primary">Print Full Recipe</button>
+                </center>
+            </div>
+        </div>
+    </div>
+	<!---------------------------------------------------------------------------------------------------->
+		
+		
+		
     </div>
     <div class="row myFooter">
         <div class="col-sm-12 text-center addBorder-top">

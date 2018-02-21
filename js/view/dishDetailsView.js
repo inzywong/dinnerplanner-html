@@ -36,8 +36,28 @@ var DishDetailsView = function (container, model, _dishId)
    
    this.update = function()
    {
-            
+
+	   //this.dishId = _dishId;
+	   // Get the dish
+	  selectedDish = model.getDish(this.dishId); 	   
+
       nGuests = model.getNumberOfGuests();
+	   
+	   
+	  dName = container.find("#dish_name");
+	   
+	  dName.html(selectedDish.name); 
+	   
+	   
+   var dishPhoto = container.find("#dish_image");
+   dishPhoto.attr("src", "images/" + selectedDish.image);   
+   
+   var dishDescription = container.find("#dishDescription");
+   dishDescription.html(selectedDish.description);
+
+   
+   var preparation = container.find("#preparation");
+   preparation.html(selectedDish.description);	   
 
 
        // Table ------------------------------------------------------------------------------------------------------
