@@ -8,7 +8,7 @@ var DinnerModel = function()
     
     // Array containing the ID of the dishes selected
     //var dishesSelectedID = [2,103,202];
-	var dishesSelectedID = [];
+	var dishesSelectedID=2;
 	var menu = [];   
    
    var observers = [];
@@ -261,12 +261,9 @@ var DinnerModel = function()
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id, callback, errorCallback) {
-	  for(key in dishesSelectedID){
-			if(dishesSelectedID[key].id == id) {
-				callback(dishesSelectedID[key]);
-			}
-			return dishesSelectedID[key];
-		}
+		if(dishesSelectedID == id) {
+			callback(dishesSelectedID);
+		}	
 		$.ajax( {
 			url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+id+"/information",
 			headers: {
@@ -274,7 +271,7 @@ var DinnerModel = function()
 			},
 			success: function(data) {
 			  console.log(data);
-			  dishesSelectedID.push(data);
+			 setDishesSelectedID = data; 
 			  callback(data)
 			},
 			error: function(error) {
@@ -282,7 +279,12 @@ var DinnerModel = function()
 			}
 		  });
 	}
-
+	this.getDishesSelectedID= function(){
+		return dishesSelectedID;
+	}
+	this.setDishesSelectedID=function(id){
+		dishesSelectedID = id;
+	}
 
 	// the dishes variable contains an array of all the 
 	// dishes in the database. each dish has id, name, type,

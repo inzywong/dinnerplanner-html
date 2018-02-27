@@ -1,33 +1,33 @@
 
 
-var DishDetailsView = function (container, model, _dishId) 
+var DishDetailsView = function (container, model) 
 {     
     model.addObserver(this);
-   this.container= container;
    
    var nGuests; // = model.getNumberOfGuests();
 
-   //get the <h1 id="dish_name">
-   var dName = container.find("#dish_name");
+   //get the <h1 id="dish_name">    
     
-    
-   this.dishId = _dishId;
+   this.dishId = model.getDishesSelectedID();
    // Get the dish
-   var selectedDish = model.getDish(this.dishId); 
-   
-   dName.html(selectedDish.name);
-   
 
-   var dishPhoto = container.find("#dish_image");
-   dishPhoto.attr("src", "images/" + selectedDish.image);   
-   
-   var dishDescription = container.find("#dishDescription");
-   dishDescription.html(selectedDish.description);
-
-   
-   var preparation = container.find("#preparation");
-   preparation.html(selectedDish.description);
+   this.dishDetailsUpdater = function(selectedDish){
+    nGuests = model.getNumberOfGuests();
+   // console.log("work = "+ selectedDish);
+    var dName = container.find("#dish_name");
+    dName.html(selectedDish.title);
     
+    var dishPhoto = container.find("#dish_image");
+    dishPhoto.attr("src", selectedDish.image); 
+   
+    var preparation = container.find("#preparation");
+    console.log("i hate this love song : "+selectedDish.pricePerServing);
+    preparation.html(selectedDish.analyzedInstructions);
+     
+    this.addToMenuButton = container.find("#add_to_menu"); 
+
+   }
+
    
    // Reference to the buttons
    this.backToSearchButton = container.find("#back_to_search");
@@ -36,7 +36,11 @@ var DishDetailsView = function (container, model, _dishId)
    
    this.update = function()
    {
+    this.dishId = model.getDishesSelectedID();
+    //console.log("updates dish id:= "+ this.dishId);
+    model.getDish(this.dishId, this.dishDetailsUpdater, this.error);
 
+/*
 	   //this.dishId = _dishId;
 	   // Get the dish
 	  selectedDish = model.getDish(this.dishId); 	   
@@ -46,16 +50,12 @@ var DishDetailsView = function (container, model, _dishId)
 	   
 	  dName = container.find("#dish_name");
 	   
-	  dName.html(selectedDish.name); 
+	  dName.html(selectedDish.title); 
 	   
 	   
    var dishPhoto = container.find("#dish_image");
    dishPhoto.attr("src", "images/" + selectedDish.image);   
-   
-   var dishDescription = container.find("#dishDescription");
-   dishDescription.html(selectedDish.description);
 
-   
    var preparation = container.find("#preparation");
    preparation.html(selectedDish.description);	   
 
@@ -110,14 +110,13 @@ var DishDetailsView = function (container, model, _dishId)
       // Reference to the buttons
       //this.backToSearchButton = container.find("#back_to_search");
       this.addToMenuButton = container.find("#add_to_menu");      
-      
+      */
    }
 
    this.error = function(data){
        container.html("<p>Somethings wrong try again later</p>");
    }
 
-   model.getDish(_dishId, this.updateInfo, this.error);
    this.update();
 }
 

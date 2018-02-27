@@ -32,7 +32,7 @@ $(function()
     views.fullRecipe = new FullReceipeView($("#fullReceipe"), model);
     views.sideBar = new SideBarView($("#sideBar"), model);
     views.findDishes = new SearchView($("#findDishes"), model);
-    views.dishDetails = new DishDetailsView($("#dishDetails"), model, 2);
+    views.dishDetails = new DishDetailsView($("#dishDetails"), model);
     
     // Will contain all the controllers
     var controllers = {};
@@ -81,10 +81,10 @@ $(function()
     }
     
    
-    pagesDisplayer.showDishDetails = function(_dishId){
+    pagesDisplayer.showDishDetails = function(){
 		
-		console.log(_dishId);
-		views.dishDetails.dishId = _dishId;
+		//console.log(model.getDishesSelectedID);
+		//views.dishDetails.dishId = model.getDishesSelectedID;
 		views.dishDetails.update();
 
 		hideAll();

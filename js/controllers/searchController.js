@@ -5,7 +5,8 @@ var SearchController = function(view, model, pagesDisplayer)
    //Click on dish action
    view.inputDiv.on("click", ".nav-to-dish", function(e){
       e.preventDefault();
-      pagesDisplayer.showDishDetails( $(this).data("id") ); 
+      model.setDishesSelectedID($(this).data("id"));
+      pagesDisplayer.showDishDetails();
    });
    
    
