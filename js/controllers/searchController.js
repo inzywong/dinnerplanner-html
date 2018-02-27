@@ -2,32 +2,33 @@
 
 var SearchController = function(view, model, pagesDisplayer) 
 {
-   
-   view.imageGrid.on("click", ".nav-to-dish", function(e){
+   //Click on dish action
+   view.inputDiv.on("click", ".nav-to-dish", function(e){
       e.preventDefault();
       pagesDisplayer.showDishDetails( $(this).data("id") ); 
    });
    
    
-   
+   //drop down 
    view.searchBar.on("change", "#DishType", function()
    {
       var type = $(this).val();
-      
+      view.inputDiv.html("<center><img src='https://media1.tenor.com/images/8ac12962c05648c55ca85771f4a69b2d/tenor.gif?itemid=9212724'></center>");
       if(type == "all")
       {
-         view.selectableDishes(model.getAllDishes(), view.imageGrid);
+          model.getAllDishes(null, null, view.selectableDishes, view.error,view.inputDiv);
+         //view.selectableDishes(model.getAllDishes(), view.imageGrid);
       }
       else
       {
-         view.selectableDishes(model.getAllDishes(type, null), view.imageGrid);         
+        model.getAllDishes(type, null, view.selectableDishes, view.error, view.inputDiv);
+        //view.selectableDishes(model.getAllDishes(type, null), view.imageGrid);         
       }
    });
    
-   
+   //input to search field
    view.searchBar.on("input", "#SearchField", function()
    {
-      console.log("Hello");
-      view.selectableDishes(model.getAllDishes(null, $(this).val()), view.imageGrid);
+      model.getAllDishes(null, $(this).val(), view.selectableDishes, view.error, view.inputDiv);
    });
 }

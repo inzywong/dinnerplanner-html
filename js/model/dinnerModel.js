@@ -1,10 +1,10 @@
 //DinnerModel Object constructor
 var DinnerModel = function() 
 {
-    var nGuests;
-    
-    //nGuests = 3;
-    nGuests = 0;
+	var nGuests = 0;
+	
+	var randomRecipes = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=15&tags=";
+	var APIkey = "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB";
     
     // Array containing the ID of the dishes selected
     //var dishesSelectedID = [2,103,202];
@@ -38,7 +38,8 @@ var DinnerModel = function()
         else
         {
             nGuests = num; 
-        }
+		}
+		//I think we need to notifyObserver()
 	}
 	
 	this.getNumberOfGuests = function() 
@@ -205,7 +206,7 @@ var DinnerModel = function()
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
-	this.getAllDishes = function (type,filter) 
+	/*this.getAllDishes = function (type,filter) 
     {
 	  return dishes.filter(function(dish) 
       {
@@ -230,6 +231,30 @@ var DinnerModel = function()
 			return found;
 		}
 	  });	
+	}*/
+
+	this.getAllDishes = function (type, filter, callback, errorCallback, inputDiv) {
+		if(type){
+			var myType = "type="+type;
+		}
+		if(filter){
+			var myFilter = "query="+filter;
+		}
+		$.ajax( {
+		   //url: randomRecipes,
+		   url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?"+myType+"&"+myFilter,
+		   headers: {
+			 'X-Mashape-Key': APIkey
+		   },
+		   success: function(data) {
+			console.log(data);
+			callback(data.results, inputDiv)
+		   },
+		   error: function(error) {
+			   //console.log(error);
+			errorCallback(error, inputDiv)
+		   }
+		 });
 	}
 
 	//function that returns a dish of specific ID

@@ -1,7 +1,3 @@
-
-
-
-
 var DishDetailsController = function(view, model, pagesDisplayer) 
 {
   
@@ -16,10 +12,8 @@ var DishDetailsController = function(view, model, pagesDisplayer)
 	view.addToMenuButton.click(function(e)
     {       
        console.log("Hello");
-       
        // Add the dish 
-       model.addDishToMenu( view.dishId  );	
-       
+       model.addDishToMenu( $(this).data("dish-id"));	
        // Go back to the SelectDishPage
        pagesDisplayer.showSelectDishesPage();
 	});   
