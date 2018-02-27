@@ -8,7 +8,8 @@ var DinnerModel = function()
     
     // Array containing the ID of the dishes selected
     //var dishesSelectedID = [2,103,202];
-    var dishesSelectedID = [];   
+	var dishesSelectedID = [];
+	var menu = [];   
    
    var observers = [];
    
@@ -65,11 +66,11 @@ var DinnerModel = function()
 	this.getSelectedDish = function(type) 
     {
         // Go through every dish selected
-        for(var i=0; i<dishesSelectedID.length; i++)
+        for(var i=0; i<menu.length; i++)
         {
-            if(dishesSelectedID[i].type == type)
+            if(menu[i].type == type)
             {
-                return this.getDish(dishesSelectedID[i]);
+                return this.getDish(menu[i]);
             }
         }
         
@@ -84,9 +85,9 @@ var DinnerModel = function()
 		var allDishesOnTheMenu = [];
         
         // Go through every dish selected
-        for(var i=0; i<dishesSelectedID.length; i++)
+        for(var i=0; i<menu.length; i++)
         {
-            allDishesOnTheMenu.push(this.getDish(dishesSelectedID[i]));
+            allDishesOnTheMenu.push(this.getDish(menu[i]));
         }
         
         return allDishesOnTheMenu;        
@@ -95,7 +96,8 @@ var DinnerModel = function()
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() 
     {
-        return this.getAllDishes();
+		//return this.getAllDishes();
+		return menu;
 	}
 
     
@@ -105,9 +107,9 @@ var DinnerModel = function()
 		var allIngredients = [];
     
         // Go through every dish selected
-        for(var i=0; i<dishesSelectedID.length; i++)
+        for(var i=0; i<menu.length; i++)
         {
-            allIngredients.push(this.getDish(dishesSelectedID[i]).ingredients);
+            allIngredients.push(this.getDish(menu[i]).ingredients);
         }
  
         return allIngredients;
@@ -141,9 +143,9 @@ var DinnerModel = function()
        
 
        // If there is no selected dishes, we should add it right away
-       if(dishesSelectedID.length == 0)
+       if(menu.length == 0)
        {
-          dishesSelectedID.push(id);
+          menu.push(id);
        }       
        
        // If there is already some dishes selected, we should check if there isn't some dish of the same type
@@ -151,14 +153,14 @@ var DinnerModel = function()
        {
           var inserted = false;
           // Go through every dish selected
-          for(var i=0; i<dishesSelectedID.length; i++)
+          for(var i=0; i<menu.length; i++)
           {        
-             if( this.getDish(dishesSelectedID[i]).type == this.getDish(id).type)
+             if( this.getDish(menu[i]).type == this.getDish(id).type)
              {
-                this.removeDishFromMenu(dishesSelectedID[i]);
+                this.removeDishFromMenu(menu[i]);
                 
                 // Adding the new dish to our dishesSelectedID
-                dishesSelectedID.push(id);
+                menu.push(id);
                 
                 inserted = true;
                 break;
@@ -167,7 +169,7 @@ var DinnerModel = function()
           
           if(!inserted)
           {
-             dishesSelectedID.push(id);
+             menu.push(id);
           }
        }
 
@@ -178,11 +180,11 @@ var DinnerModel = function()
 	this.removeDishFromMenu = function(id) 
     {
         // Go through every dish selected
-        for(var i=0; i<dishesSelectedID.length; i++)
+        for(var i=0; i<menu.length; i++)
         {
-            if( dishesSelectedID[i] == id )
+            if( menu[i] == id )
             {
-                dishesSelectedID.splice(i,1);
+                menu.splice(i,1);
             }
         }
        
@@ -258,12 +260,27 @@ var DinnerModel = function()
 	}
 
 	//function that returns a dish of specific ID
-	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].id == id) {
-				return dishes[key];
+	this.getDish = function (id, callback, errorCallback) {
+	  for(key in dishesSelectedID){
+			if(dishesSelectedID[key].id == id) {
+				callback(dishesSelectedID[key]);
 			}
+			return dishesSelectedID[key];
 		}
+		$.ajax( {
+			url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+id+"/information",
+			headers: {
+			  'X-Mashape-Key': APIkey
+			},
+			success: function(data) {
+			  console.log(data);
+			  dishesSelectedID.push(data);
+			  callback(data)
+			},
+			error: function(error) {
+			  errorCallback(error)
+			}
+		  });
 	}
 
 
