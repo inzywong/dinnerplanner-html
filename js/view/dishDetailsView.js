@@ -20,10 +20,56 @@ var DishDetailsView = function (container, model)
     var dishPhoto = container.find("#dish_image");
     dishPhoto.attr("src", selectedDish.image); 
    
+    var description = container.find("#dishDescription");
+    description.html(selectedDish.instructions);
+    var testvariable = selectedDish.analyzedInstructions;
+console.log("ffef fefef fefe f "+testvariable);
+
+    /*var stepbystep = selectedDish.analyzedInstructions[0].steps.forEach(function(step){
+        description.append("<p>"+step.step+"</p>");
+    });*/
     var preparation = container.find("#preparation");
-    console.log("i hate this love song : "+selectedDish.pricePerServing);
-    preparation.html(selectedDish.analyzedInstructions);
-     
+    //console.log("price ??: "+selectedDish.pricePerServing);
+    //preparation.html();
+
+    // Table ------------------------------------------------------------------------------------------------------
+       // Ingredients for X people
+       var tableTitle = container.find("#tableTitle");
+       tableTitle.html("Ingredients for " + nGuests + " people");
+
+       //var ingredients = selectedDishes[0].ingredients;
+       var ingredients = selectedDish.extendedIngredients;
+        /*ingredients.forEach(function(element) {
+            console.log(element.name);
+          });*/
+       var tableItens = container.find("#tableIngredients"); 
+       tableItens.html("");
+/*
+       for(var i=0; i<ingredients.length; i++)
+       {        
+           var htmlToBeAdded = "<div class='row'>";
+
+           // div for the quantity
+           //htmlToBeAdded += " <div class='col-xs-3 text-right'> <p>" + ingredients[i].quantity + " " + ingredients[i].unit + "</p>  </div> "
+
+           // ingredient's name
+           htmlToBeAdded += " <div class='col-xs-3 text-right'> <p>" + ingredients[i].originalString + "</p>  </div> "
+
+
+           // SEK
+           htmlToBeAdded += " <div class='col-xs-3 text-right'> <p> SEK </p>  </div> "
+
+           // PRICE 
+           //htmlToBeAdded += " <div class='col-xs-3 text-right'> <p>" + parseInt(ingredients[i].price)*nGuests + "</p>  </div> "
+
+
+           // Close the row div
+           htmlToBeAdded += "</div>"
+
+          
+           tableItens.prepend(htmlToBeAdded);        
+       }
+     */
     this.addToMenuButton = container.find("#add_to_menu"); 
 
    }
@@ -41,23 +87,7 @@ var DishDetailsView = function (container, model)
     model.getDish(this.dishId, this.dishDetailsUpdater, this.error);
 
 /*
-	   //this.dishId = _dishId;
-	   // Get the dish
-	  selectedDish = model.getDish(this.dishId); 	   
-
-      nGuests = model.getNumberOfGuests();
-	   
-	   
-	  dName = container.find("#dish_name");
-	   
-	  dName.html(selectedDish.title); 
-	   
-	   
-   var dishPhoto = container.find("#dish_image");
-   dishPhoto.attr("src", "images/" + selectedDish.image);   
-
-   var preparation = container.find("#preparation");
-   preparation.html(selectedDish.description);	   
+	    
 
 
        // Table ------------------------------------------------------------------------------------------------------

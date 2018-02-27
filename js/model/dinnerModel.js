@@ -8,7 +8,7 @@ var DinnerModel = function()
     
     // Array containing the ID of the dishes selected
     //var dishesSelectedID = [2,103,202];
-	var dishesSelectedID=2;
+	var dishesSelectedID=1;
 	var menu = [];   
    
    var observers = [];
