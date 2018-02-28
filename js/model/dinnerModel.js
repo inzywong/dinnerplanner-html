@@ -202,6 +202,38 @@ var DinnerModel = function()
         return price
 	}    
 
+	
+	
+	// Now using the API (ajax)
+	this.getAllDishes = function (callback, errorCallback, type,filter, imgGrid) 
+    {		
+		if(type){
+			var myType = "type="+type;
+		}
+		if(filter){
+			var myFilter = "query="+filter;
+		}
+		
+		$.ajax( {
+			url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?"+myType+"&"+myFilter,
+			headers: {
+				'X-Mashape-Key': "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB"
+			},
+
+			success: function(data) {
+				//console.log(data);
+				callback(data.results, imgGrid)
+			},
+
+			error: function(error) {
+				//console.log(error);
+			 	errorCallback(error, imgGrid)
+			}
+		});		
+	}
+
+	
+	/*
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
@@ -231,6 +263,10 @@ var DinnerModel = function()
 		}
 	  });	
 	}
+	*/
+	
+	
+	
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {

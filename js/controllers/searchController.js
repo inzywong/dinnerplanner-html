@@ -9,25 +9,27 @@ var SearchController = function(view, model, pagesDisplayer)
    });
    
    
-   
+   // When the user changes the dropdown menu
    view.searchBar.on("change", "#DishType", function()
-   {
-      var type = $(this).val();
+   {     
+	   var type = $(this).val();
       
-      if(type == "all")
-      {
-         view.selectableDishes(model.getAllDishes(), view.imageGrid);
-      }
-      else
-      {
-         view.selectableDishes(model.getAllDishes(type, null), view.imageGrid);         
-      }
+	   if(type == "all") {
+		   model.getAllDishes(view.selectableDishes, view.error, null, null, view.imageGrid);
+		   //view.selectableDishes(model.getAllDishes(), view.imageGrid);
+	   }
+	   else {
+		   model.getAllDishes(view.selectableDishes, view.error, type, null, view.imageGrid);		   
+		   //view.selectableDishes(model.getAllDishes(type, null), view.imageGrid);         
+	   }
    });
    
    
+   // When the user is typing the name of the dish/ingredient 
    view.searchBar.on("input", "#SearchField", function()
    {
-      console.log("Hello");
-      view.selectableDishes(model.getAllDishes(null, $(this).val()), view.imageGrid);
+	  model.getAllDishes(view.selectableDishes, view.error, null, $(this).val(), view.imageGrid);	   
+	   
+      //view.selectableDishes(model.getAllDishes(null, $(this).val()), view.imageGrid);
    });
 }
