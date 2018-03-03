@@ -70,10 +70,11 @@ $(function()
     
     // show sidebar + findDishes 
     pagesDisplayer.showSelectDishesPage = function(){
+	
 		
-		hideAll();
-		$("#sideBar").show();
-		$("#findDishes").show();	
+	   hideAll();
+	   $("#sideBar").show();
+	   $("#findDishes").show();	
 		
        //appDiv.html("");
        //showSideBar();
@@ -83,7 +84,7 @@ $(function()
    
     pagesDisplayer.showDishDetails = function(_dishId){
 		
-		console.log(_dishId);
+		//console.log(_dishId);
 		views.dishDetails.dishId = _dishId;
 		views.dishDetails.update();
 

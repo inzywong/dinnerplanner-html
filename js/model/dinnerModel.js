@@ -18,6 +18,10 @@ var DinnerModel = function()
       
    }
    
+   this.getDishesSelectedID = function()
+   {
+	   return dishesSelectedID;
+   }
    
    var notifyObservers = function(obj)
    {
@@ -76,21 +80,32 @@ var DinnerModel = function()
         return (-1);
 	}
 
+	
+	
+	
+	/*
     // Returns all dishes selected
     this.getSelectedDishes = function()
     {
         // Array that is gonna contain all the dishes selected
 		var allDishesOnTheMenu = [];
         
+		console.log("dishesSelectedID: " + dishesSelectedID);
+		
         // Go through every dish selected
         for(var i=0; i<dishesSelectedID.length; i++)
-        {
-            allDishesOnTheMenu.push(this.getDish(dishesSelectedID[i]));
+        { 
+			console.log("this.getDish(dishesSelectedID[i]): " + this.getDish(dishesSelectedID[i]) );
+            allDishesOnTheMenu.push( this.getDish(dishesSelectedID[i]) );
         }
         
-        return allDishesOnTheMenu;        
+		console.log("allDishesOnTheMenu:" + allDishesOnTheMenu);
+        return allDishesOnTheMenu;       	
     }
-    
+    */
+	
+	
+	
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() 
     {
@@ -169,8 +184,8 @@ var DinnerModel = function()
              dishesSelectedID.push(id);
           }
        }
-
-      notifyObservers(); 
+		
+	   notifyObservers(); 
     }
 
 	//Removes dish from menu
@@ -233,6 +248,9 @@ var DinnerModel = function()
 	}
 
 	
+	
+	
+	
 	/*
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
@@ -267,16 +285,45 @@ var DinnerModel = function()
 	
 	
 	
+	
+	
+	// Function that returns a dish of specific ID
+	// ( this.cbTest, this.errorCb, this.dishId )
+	this.getDish = function ( callback, errorCallback, id) {
+		
+		$.ajax( {
+			url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+id+"/information",
+			
+			headers: {
+			   'X-Mashape-Key': "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB"
+		   	},
+			
+			success: function(data) 
+			{
+				//console.log("This is the data from getDish2: ");
+		     	//console.log(data);
+				callback(data);
+			},
+			
+			error: function(error) 
+			{
+				//errorCallback(error)
+			}
+		});		
+	}
+	
 
-	//function that returns a dish of specific ID
+	/*
+	// Function that returns a dish of specific ID
 	this.getDish = function (id) {
-	  for(key in dishes){
+		
+		for(key in dishes){
 			if(dishes[key].id == id) {
 				return dishes[key];
 			}
 		}
 	}
-
+	*/
 
 	// the dishes variable contains an array of all the 
 	// dishes in the database. each dish has id, name, type,

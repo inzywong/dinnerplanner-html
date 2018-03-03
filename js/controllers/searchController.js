@@ -3,8 +3,11 @@
 var SearchController = function(view, model, pagesDisplayer) 
 {
    
+   // When the user clicks on a 'Dish'.
    view.imageGrid.on("click", ".nav-to-dish", function(e){
       e.preventDefault();
+	 
+	  //console.log( "Clicked dish ID: " + $(this).data("id") );
       pagesDisplayer.showDishDetails( $(this).data("id") ); 
    });
    
@@ -15,6 +18,7 @@ var SearchController = function(view, model, pagesDisplayer)
 	   var type = $(this).val();
       
 	   if(type == "all") {
+		   // 
 		   model.getAllDishes(view.selectableDishes, view.error, null, null, view.imageGrid);
 		   //view.selectableDishes(model.getAllDishes(), view.imageGrid);
 	   }
@@ -28,8 +32,7 @@ var SearchController = function(view, model, pagesDisplayer)
    // When the user is typing the name of the dish/ingredient 
    view.searchBar.on("input", "#SearchField", function()
    {
-	  model.getAllDishes(view.selectableDishes, view.error, null, $(this).val(), view.imageGrid);	   
-	   
-      //view.selectableDishes(model.getAllDishes(null, $(this).val()), view.imageGrid);
+	   model.getAllDishes(view.selectableDishes, view.error, null, $(this).val(), view.imageGrid);	   
+	   //view.selectableDishes(model.getAllDishes(null, $(this).val()), view.imageGrid);
    });
 }
