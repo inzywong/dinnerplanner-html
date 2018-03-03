@@ -9,6 +9,8 @@ var DinnerModel = function()
     // Array containing the ID of the dishes selected
     //var dishesSelectedID = [2,103,202];
     var dishesSelectedID = [];   
+	
+   var dishesSelected = [];
    
    var observers = [];
    
@@ -81,7 +83,11 @@ var DinnerModel = function()
 	}
 
 	
-	
+    // Returns all dishes selected
+    this.getSelectedDishes = function()
+    {
+        return dishesSelected;       	
+    }
 	
 	/*
     // Returns all dishes selected
@@ -133,6 +139,12 @@ var DinnerModel = function()
     {
         var totalPrice = 0;
     
+        for(var i=0; i< dishesSelected.length; i++)
+        {
+            totalPrice += dishesSelected[i].pricePerServing;
+        }
+		return totalPrice*nGuests;  
+		/*
         var ingredients = this.getAllIngredients();       
        
         // Each dish has a list of ingredients.
@@ -145,15 +157,86 @@ var DinnerModel = function()
             }
         }
 
-        return totalPrice*nGuests;   
+        return totalPrice*nGuests;  
+		*/
 	}
 
+	//Removes dish from menu
+	this.removeDishFromMenu = function(dish) 
+    {
+        // Go through every dish selected
+        for(var i=0; i<dishesSelected.length; i++)
+        {
+            if( dishesSelected[i].id == dish.id )
+            {
+                dishesSelected.splice(i,1);
+            }
+        }
+       	
+        notifyObservers();  
+		/*
+        // Go through every dish selected
+        for(var i=0; i<dishesSelectedID.length; i++)
+        {
+            if( dishesSelectedID[i] == id )
+            {
+                dishesSelectedID.splice(i,1);
+            }
+        }
+       	
+        notifyObservers();   
+		*/
+	}	
+	
+	this.addDishToMenuCallback = function(dish)
+	{
+		if(dishesSelected.length == 0 && dish != null)
+		{
+			dishesSelected.push(dish);
+		}       
+
+		// If there is already some dishes selected, we should check if there isn't some dish of the same type
+		else
+		{
+			var inserted = false;
+			// Go through every dish selected
+			for(var i=0; i<dishesSelected.length; i++)
+			{        
+				if( dishesSelected[i].type == dish.type)
+				{
+					//this.removeDishFromMenu(dishesSelected[i]);
+					// Remove dish
+					dishesSelected.splice(i,1);
+
+					// Adding the new dish to our dishesSelectedID
+					dishesSelected.push(dish);
+
+					inserted = true;
+					break;
+				}
+			}
+
+			if(!inserted)
+			{
+				dishesSelected.push(dish);
+			}
+		}
+
+		notifyObservers();
+	}
+	
+	this.addDishToMenuError = function()
+	{
+		console.log("There was an error when trying to request a dish");
+	}	
+	
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) 
     {           
+	   var dish= this.getDish(this.addDishToMenuCallback, this.addDishToMenuError,id);		
        
-
+	   /*
        // If there is no selected dishes, we should add it right away
        if(dishesSelectedID.length == 0)
        {
@@ -186,22 +269,10 @@ var DinnerModel = function()
        }
 		
 	   notifyObservers(); 
+	   */
     }
 
-	//Removes dish from menu
-	this.removeDishFromMenu = function(id) 
-    {
-        // Go through every dish selected
-        for(var i=0; i<dishesSelectedID.length; i++)
-        {
-            if( dishesSelectedID[i] == id )
-            {
-                dishesSelectedID.splice(i,1);
-            }
-        }
-       
-        notifyObservers();       
-	}
+
     
     //Get the price of the dish
 	this.getDishPrice = function(id) 
@@ -289,7 +360,7 @@ var DinnerModel = function()
 	
 	// Function that returns a dish of specific ID
 	// ( this.cbTest, this.errorCb, this.dishId )
-	this.getDish = function ( callback, errorCallback, id) {
+	this.getDish = function ( callback = null , errorCallback = null, id) {
 		
 		$.ajax( {
 			url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+id+"/information",
@@ -310,6 +381,7 @@ var DinnerModel = function()
 				//errorCallback(error)
 			}
 		});		
+		
 	}
 	
 

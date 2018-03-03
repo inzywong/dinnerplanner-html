@@ -47,7 +47,8 @@ var DinnerSummaryView = function (container, model)
 	   for(var i=0; i< dishesSelected.length; i++)
 	   {
 
-		  dishesListDiv.append("<div style='width:200px; float: left; margin-left: 10px;'> <img src='images/" + dishesSelected[i].image + "'  style='width:200px; height: 200px'> <p>" + model.getDishPrice(dishesSelected[i].id) + " SEK </p> ");
+		  dishesListDiv.append("<div style='width:200px; float: left; margin-left: 10px;'> <img src='" + dishesSelected[i].image + "'  style='width:200px; height: 200px'> <p>" + dishesSelected[i].pricePerServing + " SEK </p> ");
+		   // model.getDishPrice(dishesSelected[i].id)
 	   }
 
 

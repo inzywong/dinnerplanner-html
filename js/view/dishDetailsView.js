@@ -8,7 +8,6 @@ var DishDetailsView = function (container, model, _dishId)
    this.dishObject;
 	
    // In case no dish was returned, we'll use this object to display the properties on the view.
-   this.dishDefault = {name:" ", ingredients: ""};	
    this.dishDefault = {'id':1,
 		'name':'',
 		'type':'',
@@ -164,19 +163,10 @@ var DishDetailsView = function (container, model, _dishId)
    
    
    this.cbTest = function(dish)
-   {
+   {	   
 	   this.dishObject = dish;
-
-	   //console.log("DISH ON CALLBACK: ");
-	   //console.log(dish);
-	   //console.log("We are here, in the callback function!");
-	   //console.log( typeof(dish) );
-	   //console.log(dish);
 	   
 	   selectedDish	= this.dishObject;   
-
-	   //console.log("Dish on update(): ");
-	   //console.log(selectedDish);
 	   
 	   if( selectedDish == null )
 	   {
@@ -199,9 +189,8 @@ var DishDetailsView = function (container, model, _dishId)
 	   dName = container.find("#dish_name");
 	   
 
-		  
-	   dName.html(selectedDish.name); 
-	   //dName.html(selectedDish.title); 
+	   //dName.html(selectedDish.name); 
+	   dName.html(selectedDish.title); 
 	   
 	   
 	   var dishPhoto = container.find("#dish_image");
