@@ -19,7 +19,4 @@ var SideBarController = function(view, model, pagesDisplayer)
     {
          pagesDisplayer.showDinnerSummary();
 	});          
-
 }
-
-

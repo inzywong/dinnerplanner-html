@@ -32,7 +32,7 @@ $(function()
     views.fullRecipe = new FullReceipeView($("#fullReceipe"), model);
     views.sideBar = new SideBarView($("#sideBar"), model);
     views.findDishes = new SearchView($("#findDishes"), model);
-    views.dishDetails = new DishDetailsView($("#dishDetails"), model);
+    views.dishDetails = new DishDetailsView($("#dishDetails"), model, 2);
     
     // Will contain all the controllers
     var controllers = {};
@@ -70,10 +70,11 @@ $(function()
     
     // show sidebar + findDishes 
     pagesDisplayer.showSelectDishesPage = function(){
+	
 		
-		hideAll();
-		$("#sideBar").show();
-		$("#findDishes").show();	
+	   hideAll();
+	   $("#sideBar").show();
+	   $("#findDishes").show();	
 		
        //appDiv.html("");
        //showSideBar();
@@ -81,14 +82,13 @@ $(function()
     }
     
    
-    pagesDisplayer.showDishDetails = function(){
-		
-		//console.log(model.getDishesSelectedID);
-		//views.dishDetails.dishId = model.getDishesSelectedID;
+    pagesDisplayer.showDishDetails = function(_dishId){
+		//console.log(_dishId);
+		views.dishDetails.dishId = _dishId;
 		views.dishDetails.update();
 
 		hideAll();
-		$("#sideBar").show();
+        $("#sideBar").show();
 		$("#dishDetails").show();	
 		
 		
@@ -128,7 +128,8 @@ $(function()
 		$("#fullReceipe").hide();
 		$("#sideBar").hide();
 		$("#findDishes").hide();
-		$("#dishDetails").hide();		
+        $("#dishDetails").hide();	
+	
 	}
 	
     function showSideBar(){
